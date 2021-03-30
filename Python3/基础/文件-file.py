@@ -71,3 +71,14 @@ from io import BytesIO
 f = BytesIO(b'\xe4\xb8\xad\xe6\x96\x87')
 f.read()
 # b'\xe4\xb8\xad\xe6\x96\x87'
+
+# 处理压缩文件
+# gzip和bzip2是非Windows操作系统下最流行 的两种压缩方式。
+# gzip 模块允许你创建用来读写 gzip 压缩文件的流对象。该流对象支持read()方法(如果你以读取模式打开)
+# 或者write()方 法(如果你以写入模式打开)。这就意味着，你可以使用从普 通文件那儿学到的技术来直接读写 gzip 压缩文件，而不需要创 建临时文件来保存解压缩了的数据。
+# 作为额外的功能，它也支持 with 语句，所以当你完成了对 gzip 压缩文件的操作，Python 可以为你自动关闭它。
+import gzip
+with gzip.open('out.log.gz', mode='wb') as z_file:
+    z_file.write('A nine mile walk is no joke, especially in the rain.'.encode('utf‐8'))
+
+
