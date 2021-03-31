@@ -29,7 +29,7 @@ setup(
 # ├── dist
 # │   └── hi_module-1.0.tar.gz
 # ├── hiFun.py
-# ├── MANIFEST
+# ├── MANIFEST   # 清单文件
 # └── setup.py
 
 # 4、安装模块
