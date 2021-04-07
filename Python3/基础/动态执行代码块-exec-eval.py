@@ -15,8 +15,8 @@ def test():
        print("iter time: %d" % i)
    return 1111
 """
-    exec(a)
-    b = test()
+    exec(a)  #  执行a后相当于有了一个test函数
+    b = test() # 声明test实例
     print(b)
 # 执行结果：
 # iter time: 0
