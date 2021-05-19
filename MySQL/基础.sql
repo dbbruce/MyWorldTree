@@ -364,4 +364,64 @@ rename命令格式：rename table 原表名 to 新表名;
     1、select 10 DIV 4;
     2、select 1+2
 
+43、MySQL REPLACE
+    MySQL REPLACE语句是标准SQL的MySQL扩展。MySQL REPLACE语句的工作原理如下：
+        如果新行已不存在，则MySQL REPLACE  语句将插入新行。
+        如果新行已存在，则  REPLACE  语句首先删除旧行，然后插入新行。在某些情况下，REPLACE语句仅更新现有行。
+    REPLACE INTO cities(name,population) VALUES('Phoenix',1321523);
+
+44、MySQL PREPARE 语句用法
+    为了使用MySQL预处理语句，您需要使用其他三个MySQL语句，如下所示：
+        PREPARE - 准备要执行的语句。
+        EXECUTE - 执行由PREPARE语句准备的预准备语句。
+        DEALLOCATE PREPARE - 发布准备好的声明。
+    实例：
+    PREPARE stmt1 FROM 'SELECT productCode, productName
+                        FROM products
+                        WHERE productCode = ?';
+    SET @pc = 'S10_1678';
+    EXECUTE stmt1 USING @pc;
+    DEALLOCATE PREPARE stmt1;
+
+45、MySQL 事务
+    使用 COMMIT 和 ROLLBACK 语句来管理MySQL中的事务
+    实例：
+    START TRANSACTION;
+    delete from cities;
+    ROLLBACK;
+
+    START TRANSACTION;
+    delete from cities where id=2;
+    COMMIT;
+
+46、MySQL 表锁定
+    READ锁-
+        持有READ锁的会话只能读取表中的数据，但无法写入
+        在READ释放锁之前，其他会话无法将数据写入表
+    LOCK TABLE tbl READ;
+    UNLOCK TABLES;
+
+    WRITE锁-
+        保存表锁的唯一会话可以从表中读取和写入数据
+        在WRITE锁定释放之前，其他会话无法从表中读取数据并将数据写入表中；
+    LOCK TABLE tbl WRITE;
+    UNLOCK TABLES;
+
+    读锁与写锁
+        读锁是“共享”锁，它可以防止正在获取写锁，但不能锁定其他读锁。
+        写锁是“独占”锁，可以防止任何其他类型的锁。
+
+47、显示数据库信息
+    select database()
+
+48、TRUNCATE TABLE
+    如果您使用InnoDB表，MySQL将在删除数据之前检查表中是否存在任何可用的外键约束。以下是案例：
+        如果表有任何外键约束，则TRUNCATE TABLE语句将逐个删除行。如果外键约束具有DELETE CASCADE操作，则还会删除子表中的相应行。
+        如果外键约束未指定DELETE CASCADE操作，则TRUNCATE TABLE逐个删除行，并且当遇到子表中的行引用的行时，它将停止并发出错误。
+        如果表没有任何外键约束，则TRUNCATE TABLE语句将删除表并重新创建一个具有相同结构的新空表，这比使用DELETE语句（尤其是对于大表）更快更有效。
+
+    TRUNCATE TABLE books;   //(10W条 0.01)
+    DELETE FROM books;      //(10W条 0.13)
+
+49、
 
