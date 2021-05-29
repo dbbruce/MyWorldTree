@@ -83,4 +83,3 @@ Shutdown: 正在关闭服务器
 Sleep: 正在等待客户端向它发送执行语句
 Statistics: 该线程正在生成 server-status 信息
 Table Dump: 正在发送表的内容到从服务器
-Time: Unused

@@ -78,7 +78,6 @@
     # 按照扫描行数最多的
     mysqldumpslow -s r -t 10 -g 'left join' /var/run/mysqld/mysqld-slow.log
 
-11、
 
 
 
