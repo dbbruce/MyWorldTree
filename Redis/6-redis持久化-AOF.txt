@@ -1,1 +1,49 @@
 1、AOF(append only file)
+    以日志的形式来记录每个写操作，将redis执行过的所有盒子里记录下来（读操作不记录），只许追加文件但不可以改写文件，redis启动之初
+    读取该文件重新构建数据，换言之，redis重启的话就根据日志文件的内容将写指令从前到后执行一次以完成数据的恢复；
+
+2、aof保存文件：
+    appendonly.aof文件，
+    redis.conf
+
+3、修复aof日志文件
+    redis-check-aof --fix appendonly.aof
+
+4、指定日志更新条件
+    appendfsync always 每次更新后手动调用fsync将数据同步到硬盘 （慢，安全）
+    appendfsync everysec 每秒同步一次（默认，出厂默认推荐）
+    appendfsync no 操作系统将数据缓存同步到硬盘（快）
+
+5、rewrite
+    AOF采用文件追加，文件越来越大，新增了重新机制；
+    当AOF文件的大小超过所设定的阈值时，redis启动AOF文件内容压缩，
+    只报了可以恢复数据的最小指令，可以使用命令bgrewriteaof
+
+6、重写原理
+    fork一个新进程将文件重写，比那里新进程的内存数据，每条记录有一条set语句。重写aof文件的操作，并没有读取旧的aof文件，
+    而是将整个内存中的数据库内容用命令的方式重写一个新的aof文件。
+
+7、设置重写基准值
+    auto-aof-rewrite-percentage 100
+    auto-aof-rewrite-min-size 64mb
+
+8、触发机制：
+    redis会记录上次重写时的AOF大小，默认配置AOF文件大小是上次rewrite后大小的一倍且文件大于64M时触发；
+
+9、优势
+  数据有保证，完全；
+
+10、劣势
+    aof文件远大于rdb文件，恢复速度慢于rdb；
+
+11、同时开启2种持久化
+    RDB数据不实时，同时使用2种持久化，服务器重启只会找AOF文件；建议开启2种持久化，RDB适合用于备份数据库，预防万一；
+
+12、性能建议
+RDB用作数据备份，建议只在slave上持久化RDB，而且15分钟备份一次就可以了，只保留save 900 1 这条规则；
+
+开启AOF，AOF好处是不会丢超过2秒的数据，代价是带来持续IO，二AOF rewrite最后将rewrite过程中产生的新数据写到新文件造成的阻塞几乎不可避免，
+只要硬盘可以，尽量较少rewrite频率，AOF基础64M太小了，设到5G以上，默认超过原理大小100%时重新可以改到适当值；
+
+不开启AOF，靠master-slave replication实现高可用也可以，能省掉高IO，减少rewrite波动，如果master、slave同时倒掉，会丢失10几分钟数据
+新浪微博就是这个架构；
