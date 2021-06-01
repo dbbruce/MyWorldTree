@@ -1,0 +1,108 @@
+1、redis.conf 默认配置文件
+
+2、单位大小写不敏感，1gb,1Gb是一样的
+
+3、includes,redis.conf作为总配置文件，可以包含其他配置文件
+include /path/local.conf
+
+4、tcp-backlog
+    设置tcp的backlog，backlog是一个连接队列，backlog总和=未完成3次握手+已完成3次握手；
+    高并发需要一个高值来解决慢客户端连接的问题，linux会将这个值减少为/proc/sys/net/core/somaxconn的值；
+    需要增大somaxconn和tcp_max_syn_backlog；
+
+5、database 16 默认数据库数量
+
+6、密码设置
+    1、redis命令行下获取密码： config get requirepass
+    2、redis命令行下设置密码： config set requirepass "123456"
+        密码输入方式：> auth 123456
+    3、redis命令行下获取当前目录：config get dir
+
+7、LRU（Least recently used，最近最少使用）
+算法根据数据的历史访问记录来进行淘汰数据，其核心思想是“如果数据最近被访问过，那么将来被访问的几率也更高
+
+8、常见redis配置介绍
+1、开启默认进程守护
+    daemonize yes
+2、pidfile文件
+    pidfile /var/run/redis_6379.pid
+3、默认端口6379
+    port 6379
+4、绑定主机地址
+    bind 127.0.0.1
+5、客户端闲置关闭时间，0为不关闭
+    timeout 300
+6、指定日志级别 debug、verbose、 notice、warning ，默认verbose
+    loglevel notice
+7、日志记录方式，默认标志输出;如果进程守护开启，log记录方式为stdout,将会把日志发给/dev/null
+    logfile stdout
+8、数据库数量
+    database 16
+9、指定多长时间，多少次更新，将数据同步到数据文件，可以多个条件配置
+    save <seconds> <changes>,默认提供3个条件
+    save 900 1  900秒1个更改
+    save 300 10
+    save 60 10000
+10、指定存储到本地数据库时是否压缩文件，默认yes，为了节省cpu可以关掉，但是数据文件巨大
+    rdbcompression yes
+11、指定本地数据库文件名，默认为dump.rdb
+    dbfilename dump.rdb
+12、指定本地数据库存放文件：
+    dir ./
+13、设置本机为slave时，设置master服务ip和端口，在redis启动时，它会自动从master同步数据
+    slaveof ip 端口
+14、当master设置了密码是，slave连接master的密码设置
+    masterauth 123456
+15、redis密码
+    requirepass 123456
+16、同一时间最多客户端连接数，默认无限制，当到达最大连接数时，返回 max number of clients reached
+    maxclients 128
+17、指定redis内存最大限制
+    maxmemory bytes
+18、指定每次更新操作后进行日志记录
+    appendonly no
+19、更新日志文件名
+    appendfilename "appendonly.aof"
+20、指定日志更新条件
+    appendfsync always 每次更新后手动调用fsync将数据同步到硬盘 （慢，安全）
+    appendfsync everysec 每秒同步一次（默认）
+    appendfsync no 操作系统将数据缓存同步到硬盘（快）
+21、启用虚拟内存机制，默认no；vm机制将数据分页存放，redis将访问较少的页也就是冷数据从swap存储到硬盘，访问较多的数据从硬盘放入内存
+    vm-enabled no
+22、虚拟内存文件路径
+    vm-swap-file /tmp/redis.swap
+23、将所有大于vm-max-momery的数据存入虚拟内存，索引都存储在内存中
+    vm-max-momery 0
+24、redis swap文件分成很多个page，一个对象可以保存在多个page上，但一个page不能被多个对象共享
+    vm-page-size 32
+25、设置swap文件的page数量，由于页表放在内存中，
+    vm-pages 134217728
+26、设置访问swap文件的线程数，最好不要超过机器核数
+    vm-max-threads 4
+27、向客户端应答时，多个小包是否合并成一个包发送
+    glueoutputbuf yes
+28、指定超过一定数量或则最大元素超过某个临界值，采用特殊哈希算法
+    hash-max-ziplist-entries 512
+    hash-max-ziplist-value 64
+29、指定是否激活重置哈希
+    activerehashing yes
+30、指定包含其他的配置文件
+    include /path/to/local.conf
+    include /path/to/other.conf
+
+
+
+
+
+
+
+
+10、
+11、
+12、
+13、
+14、
+15、
+16、
+17、
+18、
