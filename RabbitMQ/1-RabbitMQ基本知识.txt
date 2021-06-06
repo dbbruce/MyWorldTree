@@ -1,0 +1,46 @@
+1、MQ全程Message Queue，消息队列是应用程序与应用程序之间的通信方法；
+2、消息队列应用场景
+    1、任务异步处理
+    2、应用程序解耦合性，生产方与消费方通过MQ交互；
+    3、削峰填谷
+3、MQ实现的2种主流方式
+    AMQP：是一种协议，不限定语言，任何语言都可
+    JMS：即java消息服务应用程序接口，是java面向消息中间件的api
+4、消息队列产品
+    1、ActiveMQ:  基于JMS
+    2、ZeroMQ:   基于C语言开发
+    3、RabbitMQ:   基于AMQP协议，erlang语言开发
+    4、RocketMQ:  基于JMS，阿里巴巴产品
+    5、Kafka:  分布式消息系统，高吞吐量
+5、RabbitMQ6种模式
+    1、简单模式
+    2、work模式
+    3、publish、subscribe=发布订阅模式
+    4、routing路由模式
+    5、Topic主题模式
+    6、RPC远程调用模式
+6、查看状态
+    systemctl status rabbitmq-server
+7、启动web页面
+    rabbitmq-plugins enable rabbitmq_management
+    访问：127.0.0.1:15672 guest/guest
+8、virtual host（虚拟消息服务器）
+    1、每一个virtual host相当于一个独立的rabbitmq服务器，每个virtual host之间是隔离的，exchange,queue,message不能互通，相当于mysql的db；
+    2、一般以"/"开头；
+9、启动、停止
+    service rabbitmq-server start
+    service rabbitmq-server stop
+    service rabbitmq-server restart
+10、设置开机启动
+    chkconfig rabbitmq-server on
+11、设置配置文件
+    cd /etc/rabbitmq
+    cp /usr/share/doc/rabbitmq-server-3.4.1/rabbitmq.config.example /etc/rabbitmq/
+    mv rabbitmq.config.example rabbitmq.config
+12、rabbitMQ中的概念：
+connection 连接
+channel 通道
+exchange 交换机
+queue 队列
+
+13、RabbitMQ中消息永远不能直接发送到队列，它总要经过交换机（exchange）

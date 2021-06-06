@@ -1,0 +1,11 @@
+ 1、概念
+     1、生产者：发送消息的程序，代号P
+     2、队列：消息只能存储在队列中，代号：queue_name
+     3、消费：消费者是一个程序，主要是等待接收消息，代号：C
+
+ 2、Pika python的客户端包
+     python -m pip install pika --upgrade
+
+ 3、显示rabbitmq队列列表
+    rabbitmqctl list_queues
+
