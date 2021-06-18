@@ -44,3 +44,5 @@ exchange 交换机
 queue 队列
 
 13、RabbitMQ中消息永远不能直接发送到队列，它总要经过交换机（exchange）
+
+14、RabbitMq各个参数含义

@@ -1,0 +1,9 @@
+1、绑定的时候可以带上一个额外的routing_key参数。为了避免与basic_publish的参数混淆，我们把它叫做绑定键（binding key）
+    channel.queue_bind(exchange=exchange_name, queue=queue_name, routing_key='black')
+    绑定键的意义取决于交换机（exchange）的类型。我们之前使用过的扇型交换机（fanout exchanges）会忽略这个值。
+
+2、直连交换机（Direct exchange）
+    路由的算法很简单 —— 交换机将会对绑定键（binding key）和路由键（routing key）进行精确匹配，
+    从而确定消息该分发到哪个队列
+
+3、Routing模式（路由模式），要求队列在绑定交换机时，需要制定routing key，消息会转发到符合routing key的队列；

@@ -1,0 +1,11 @@
+1、可以根据不同的routing key转发到不同的队列中，只不过topic类型exchange可以让队列在绑定routing key的时候使用通配符；
+
+2、Routing key 一般都是有一个或多个单词组成，多个单词之间使用（.）号分隔，例如：item.insert
+    # :匹配一个或多个词
+    * :只能匹配1个词
+
+3、
+
+
+
+

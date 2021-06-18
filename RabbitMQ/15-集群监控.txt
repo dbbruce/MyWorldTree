@@ -1,0 +1,5 @@
+1、web界面监控
+    开启web界面插件
+    rabbitmq-plugins enable rabbitmq_management
+2、tracing日志监控
+3、定制自己的监控系统，使用rabbitmq提供的api进行监控（http://ip:15672/api/）

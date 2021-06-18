@@ -1,0 +1,15 @@
+1、消息确认机制
+    确认并保证消息到达，提供2中机制（两者不可以同时使用）：
+    发布确认：
+    事务：
+2、发布确认，两种方式：
+    消息发布成功确认
+    publisher-confirm=true # 启用消息确认
+    消息发布失败后回调
+    confirm-callback = failcallback # 消息失败回调
+
+3、事务 （不能和确认同时使用）
+    外部事务：
+        channel-transacted=true # 支持事务操作
+        @transactional  # 开始事务，类似装饰器，放在方法上
+

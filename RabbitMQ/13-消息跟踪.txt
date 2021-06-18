@@ -1,0 +1,12 @@
+1、消息中心的消息追踪使用trace，
+    Trace用于记录每次发送的消息，Trace启动后自动创建exchange（amq.rabbitmq.trace）
+    每个队列自动绑定该exchange，绑定后的消息都会记录到trace日志
+2、消息追踪启用和查看
+    rabbitmq-plugins list   查看插件列表
+    rabbitmq-plugins enable rabbitmq-trace   启用trace插件
+    rabbitmqctl trace-on  打开trace
+    rabbitmqctl trace-on -p vhost(/123) 打开trace开关
+    rabbitmqctl trace-off 关闭trace开关
+    rabbitmq-plugins disable rabbitmq-trace   关闭trace插件
+    rabbitmq-plugins set_user_tag heima administrator  只有管理员可以查看日志界面
+

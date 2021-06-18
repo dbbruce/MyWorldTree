@@ -30,3 +30,4 @@ channel.basic_consume(callback,
     queue=queue_name, no_ack=False)
 
 channel.start_consuming()
+

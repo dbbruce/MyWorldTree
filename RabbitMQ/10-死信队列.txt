@@ -1,0 +1,14 @@
+1、DLX Dead letter exchange，死信交换机，也称死信邮箱；当消息变为死信，重新发送到死信交换机，
+    绑定死信交换机的队列，叫做死信队列；
+2、消息变为死信的原因
+    1、消息被拒绝
+    2、消息过期
+    3、队列达到最大长度；
+3、队列上指定死信交换机：x-dead-letter-exchange= xxx
+    arguments['x-dead-letter-exchange'] = DLX
+    self.channel.queue_declare(
+            queue=queue,  # 声明队列
+            durable=durable,  # 持久化
+            arguments=arguments
+        )
+4、

@@ -1,0 +1,29 @@
+1、准备工作
+    1、确保mq可以运行；
+    2、确保mq是停止；
+2、单机多实例：
+    1、启动
+        实例1：
+        rabbitmq_node_port=5672 rabbitmq_nodename=rabbit-1 rabbitmq-server start
+        实例2：
+        rabbitmq_node_port=5673 rabbitmq_server_start_args="-rabbitmq_management listener [{port, 15673}]" rabbitmq_nodename=rabbit-2 rabbitmq-server start
+    2、设置主节点
+        # 停止应用
+        rabbitmqctl -n rabbit-1 stop_app
+        # 清除历史数据
+        rabbitmqctl -n rabbit-1 reset
+        # 启动应用
+        rabbitmqctl -n rabbit-1 start_app
+    3、设置从节点
+        # 停止应用
+        rabbitmqctl -n rabbit-2 stop_app
+        # 清除历史
+        rabbitmqctl -n rabbit-2 reset
+        # 将rabbit-2加入rabbit-1集群中
+        bitmqctl -n rabbit-2 join cluster rabbit-q@'Server-node' # Server-node为主机名
+        # 启动应用
+        rabbitmqctl -n rabbit-2 start_app
+    4、验证集群状态
+        rabbitmqctl cluster_status -n rabbit-1
+
+
