@@ -3,3 +3,5 @@
     rabbitmq-plugins enable rabbitmq_management
 2、tracing日志监控
 3、定制自己的监控系统，使用rabbitmq提供的api进行监控（http://ip:15672/api/）
+4、zabbix监控系统
+
