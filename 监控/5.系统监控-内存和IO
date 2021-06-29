@@ -1,0 +1,26 @@
+1、内存：虚拟内存，swap，物理内存
+
+2、内存是分页的
+
+3、查看内存
+free -m
+              total        used        free      shared  buff(写)/cache（读）   available（可用）
+Mem:           7984        4840         277         394        2867        2450
+Swap:             0           0           0
+
+4、vmstat
+procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
+ r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st
+ 2  0      0 284140      0 2935896    0    0     1    37    2    2  5  1 95  0  0
+
+5、iotop
+Total DISK READ :       0.00 B/s | Total DISK WRITE :       0.00 B/s
+Actual DISK READ:       0.00 B/s | Actual DISK WRITE:       0.00 B/s
+  TID  PRIO  USER     DISK READ  DISK WRITE  SWAPIN     IO>    COMMAND
+    1 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % systemd --switched-root --system --deserialize 21
+    2 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [kthreadd]
+6、监控网卡的实时流量 iftop -i eth0 -P 端口 -F 192.169.1.0/24
+7、进程网络流量： nethogs
+    yum -y install nethogs
+8、TCP监控 netstat
+9、整体监控，nmon， 二进制文件，下来直接使用

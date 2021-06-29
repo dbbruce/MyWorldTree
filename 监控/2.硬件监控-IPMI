@@ -1,0 +1,12 @@
+1、带外管理，主机坏了，这些运行还是正常
+    DELL iDRAC
+    HP ILO
+    IBM IMM
+2、IPMI 统一管理
+    IPMI是智能型平台管理接口（Intelligent Platform Management Interface）的缩写，
+    是管理基于 Intel结构的企业系统中所使用的外围设备采用的一种工业标准，该标准由英特尔、惠普、NEC、美国戴尔电脑和SuperMicro等公司制定。
+    用户可以利用IPMI监视服务器的物理健康特征，如温度、电压、风扇工作状态、电源状态等。
+3、ipmitool
+    安装 yum install openipmi ipmitool
+    systemctl start ipmi
+4、
