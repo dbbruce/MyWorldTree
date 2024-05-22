@@ -1,6 +1,6 @@
 import requests
 from lxml import etree
-import pandas
+import pandas as pd
 
 url = 'https://newhouse.fang.com/house/s/b91/'
 headers = {
@@ -21,6 +21,7 @@ for n,a,p in zip(names, address, prices):
     # print(f'名称:{n}            地址:{a}              价格:{p}')
     data.append([n,a,p])
 
+pd.set_option('display.max_colwidth', 40)
 
-df = pandas.DataFrame(data, columns=['名称','地址','价格'])
+df = pd.DataFrame(data, columns=['名称','地址','价格'])
 print(df)
