@@ -15,4 +15,3 @@ for x in range(row):
         o_img = Image.open('./女神/'+names[high*x+y])
         new_img.paste(o_img, (y*w, x*h))
 new_img.save('new_img.jpg')
-
